@@ -65,5 +65,4 @@ psql -U postgresql
 \dt
 ```
 
-
 # Next Steps
