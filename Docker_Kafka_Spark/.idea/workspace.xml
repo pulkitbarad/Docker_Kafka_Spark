@@ -6,9 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5ebe87-2d1e-43ed-bf83-1d5505603cd0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-    </list>
+    <list default="true" id="9e5ebe87-2d1e-43ed-bf83-1d5505603cd0" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -166,7 +164,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553035190920" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553036252317" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.19818182" />
@@ -194,7 +192,6 @@
     <configuration name="MyExecutor" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="MyExecutor" />
       <module name="Docker_Kafka_Spark" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;BmON19dQQDS0yzypdwuYs8cZt&quot; &quot;L4bQiVopouboo9LCzhWZPLYmR8Vef3mXcl7lZ4Rf6mYiGMWudq&quot; &quot;3112445510-WMpyJ8Y5UtWFnJ0mw0q3UCqPqWThkEeaqFgbrhO&quot; &quot;SwZQgcTw1Sm9y9StXpMBX1WOdL8LLHmv29g7I8Ak3XlH5&quot; true" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -263,7 +260,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26066098" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
