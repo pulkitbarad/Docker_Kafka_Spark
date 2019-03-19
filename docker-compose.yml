@@ -1,0 +1,88 @@
+#winpty docker exec -it kpmg_kafka_1 kafka-topics.sh --create --zookeeper kpmg_zookeeper_1:2181 --replication-factor 1 --partitions 1 --topic mytopic
+#winpty docker exec -it kpmg_kafka_1 kafka-topics.sh --list --zookeeper kpmg_zookeeper_1
+#winpty docker exec -it kpmg_kafka_1 kafka-console-producer.sh --broker-list kpmg_kafka_1:9092 --topic mytopic
+#winpty docker exec -it kpmg_kafka_1 kafka-console-consumer.sh --bootstrap-server kpmg_kafka_1:9092 --topic mytopic --from-beginning
+
+#delete invalid META-INF/RSA and META-INF/DSA files if they exist.
+
+#docker cp ./Docker_Kafka_Spark/out/artifacts/Docker_Kafka_Spark.jar c6e6ad9a9c17:/opt/Docker_Kafka_Spark.jar
+
+#winpty docker exec -it kpmg_master_1 spark-shell --deploy-mode client --driver-memory 1g --executor-memory 1g --executor-cores 1
+#winpty docker exec -it kpmg_master_1 bash
+##spark-submit --class MyExecutor --deploy-mode client --driver-memory 1g --executor-memory 1g --executor-cores 1 /opt/Docker_Kafka_Spark.jar
+##spark-submit --class MyExecutor --deploy-mode cluster --driver-memory 1g --executor-memory 1g --executor-cores 1 /opt/Docker_Kafka_Spark.jar
+
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    environment:
+      - POSTGRESQL_USERNAME=my_user
+      - POSTGRESQL_PASSWORD=BadPractice123
+      - POSTGRESQL_DATABASE=my_database    
+    networks:
+      - app-tier
+  
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - app-tier
+      
+  kafka:
+    image: 'bitnami/kafka:latest'
+    ports:
+      - '9092:9092'
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    networks:
+      - app-tier
+    
+  master:
+    image: semantive/spark
+    command: bin/spark-class org.apache.spark.deploy.master.Master -h master
+    hostname: master
+    environment:
+      MASTER: spark://master:7077
+      SPARK_CONF_DIR: /conf
+      SPARK_PUBLIC_DNS: localhost
+    ports:
+      - 4040:4040
+      - 6066:6066
+      - 7077:7077
+      - 8080:8080
+    volumes:
+      - ./data:/tmp/data
+    networks:
+      - app-tier
+    
+
+  worker:
+    image: semantive/spark
+    command: bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077
+    hostname: worker1
+    environment:
+      SPARK_CONF_DIR: /conf
+      SPARK_WORKER_CORES: 4
+      SPARK_WORKER_MEMORY: 1g
+      SPARK_WORKER_PORT: 8881
+      SPARK_WORKER_WEBUI_PORT: 8081
+      SPARK_PUBLIC_DNS: localhost
+    links:
+      - master
+    ports:
+      - 8081:8081
+    volumes:
+      - ./data:/tmp/data
+    networks:
+      - app-tier
