@@ -1,16 +1,15 @@
 #winpty docker exec -it kpmg_kafka_1 kafka-topics.sh --create --zookeeper kpmg_zookeeper_1:2181 --replication-factor 1 --partitions 1 --topic mytopic
 #winpty docker exec -it kpmg_kafka_1 kafka-topics.sh --list --zookeeper kpmg_zookeeper_1
-#winpty docker exec -it kpmg_kafka_1 kafka-console-producer.sh --broker-list kpmg_kafka_1:9092 --topic mytopic
 #winpty docker exec -it kpmg_kafka_1 kafka-console-consumer.sh --bootstrap-server kpmg_kafka_1:9092 --topic mytopic --from-beginning
+#winpty docker exec -it kpmg_kafka_1 kafka-console-producer.sh --broker-list kpmg_kafka_1:9092 --topic mytopic
 
-#delete invalid META-INF/RSA and META-INF/DSA files if they exist.
-
+##Copy jar files to master and worker nodes.
 #docker cp ./Docker_Kafka_Spark/out/artifacts/Docker_Kafka_Spark.jar c6e6ad9a9c17:/opt/Docker_Kafka_Spark.jar
+#docker cp ./Docker_Kafka_Spark/out/artifacts/Docker_Kafka_Spark.jar 5890a9e470b7:/opt/Docker_Kafka_Spark.jar
 
 #winpty docker exec -it kpmg_master_1 spark-shell --deploy-mode client --driver-memory 1g --executor-memory 1g --executor-cores 1
 #winpty docker exec -it kpmg_master_1 bash
 ##spark-submit --class MyExecutor --deploy-mode client --driver-memory 1g --executor-memory 1g --executor-cores 1 /opt/Docker_Kafka_Spark.jar
-##spark-submit --class MyExecutor --deploy-mode cluster --driver-memory 1g --executor-memory 1g --executor-cores 1 /opt/Docker_Kafka_Spark.jar
 
 version: '2'
 
