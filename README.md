@@ -1,10 +1,10 @@
 
-# Introduction?
+# Introduction
 
 This is an application to stream twitter statuses, apply simple data transformation and load it into a database. Following is the high level overview of what is available.
-Step 1: [Docker-compose](https://docs.docker.com/compose/) setup to integrate docker images for [Apache Kafka](https://hub.docker.com/r/bitnami/kafka), [Apache Spark](https://github.com/gettyimages/docker-spark) and [PostgreSQL](https://hub.docker.com/r/bitnami/postgresql).
-Step 2: [Twitter developer](https://developer.twitter.com/en.html) account and streaming listener setup to stream statuses and a Kafka Producer to send them across ZooKeeper cluster.
-Step 3: [Apache Spark streaming API](https://spark.apache.org/docs/2.1.0/streaming-kafka-integration.html) setup to consume the twitter statuses produced in previous step.
+-Step 1: [Docker-compose](https://docs.docker.com/compose/) setup to integrate docker images for [Apache Kafka](https://hub.docker.com/r/bitnami/kafka), [Apache Spark](https://github.com/gettyimages/docker-spark) and [PostgreSQL](https://hub.docker.com/r/bitnami/postgresql).
+-Step 2: [Twitter developer](https://developer.twitter.com/en.html) account and streaming listener setup to stream statuses and a Kafka Producer to send them across ZooKeeper cluster.
+-Step 3: [Apache Spark streaming API](https://spark.apache.org/docs/2.1.0/streaming-kafka-integration.html) setup to consume the twitter statuses produced in previous step.
 
 
 
