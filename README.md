@@ -43,19 +43,19 @@ spark-submit --class MyExecutor --deploy-mode client --driver-memory 1g --execut
 
 Create a new Kafka topic. (Ignore the winpty command prefix if you are on unix.)
 ```bash
-winpty docker exec -it kpmg_Kafka_1 Kafka-topics.sh --create --zookeeper kpmg_zookeeper_1:2181 --replication-factor 1 --partitions 1 --topic mytopic
+winpty docker exec -it kpmg_kafka_1 kafka-topics.sh --create --zookeeper kpmg_zookeeper_1:2181 --replication-factor 1 --partitions 1 --topic mytopic
 ```
 List and verify the newly created Kafka topic.
 ```bash
-winpty docker exec -it kpmg_Kafka_1 Kafka-topics.sh --list --zookeeper kpmg_zookeeper_1
+winpty docker exec -it kpmg_kafka_1 kafka-topics.sh --list --zookeeper kpmg_zookeeper_1
 ```
 Create a Kafka producer (Preferably in a new command shell).
 ```bash
-winpty docker exec -it kpmg_Kafka_1 Kafka-console-producer.sh --broker-list kpmg_Kafka_1:9092 --topic mytopic
+winpty docker exec -it kpmg_kafka_1 kafka-console-producer.sh --broker-list kpmg_kafka_1:9092 --topic mytopic
 ```
 Create a Kafka consumer.
 ```bash
-winpty docker exec -it kpmg_Kafka_1 Kafka-console-consumer.sh --bootstrap-server kpmg_Kafka_1:9092 --topic mytopic --from-beginning
+winpty docker exec -it kpmg_kafka_1 kafka-console-consumer.sh --bootstrap-server kpmg_kafka_1:9092 --topic mytopic --from-beginning
 ```
 Give some text inputs in the producer shell and see if you can verify them in the consumer shell.
 Connect to PostgreSQL container and verify the access using psql.
@@ -97,7 +97,7 @@ Once we have published the incoming messages, we are now able to consume these m
 def startSparkStreaming(): Unit = {
 	...
     val KafkaParams = Map[String, Object](
-      "bootstrap.servers" -> Kafka_HOST,
+      "bootstrap.servers" -> KAFKA_HOST,
       "key.deserializer" -> classOf[StringDeserializer],
       "value.deserializer" -> classOf[StringDeserializer],
       "group.id" -> "my_group_id",
