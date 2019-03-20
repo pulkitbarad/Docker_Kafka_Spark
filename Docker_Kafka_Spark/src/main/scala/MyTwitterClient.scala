@@ -20,6 +20,7 @@ import twitter4j.conf.ConfigurationBuilder
 object MyTwitterClient {
 
   val KAFKA_HOST = if (MyExecutor.isTestRun) "172.21.0.2:9092" else "kpmg_kafka_1:9092"
+  val KAFKA_TOPIC = "mytopic"
 
   case class TwitterStatus(
                             statusId: Long,
@@ -62,7 +63,7 @@ object MyTwitterClient {
 
         val statusJson = net.liftweb.json.Serialization.write(twitterStatus)
 
-        kafkaProducer.send(new ProducerRecord[String, String]("mytopic", twitterStatus.userName, statusJson))
+        kafkaProducer.send(new ProducerRecord[String, String](KAFKA_TOPIC, twitterStatus.userName, statusJson))
       }
 
       override def onDeletionNotice(statusDeletionNotice: StatusDeletionNotice): Unit = {

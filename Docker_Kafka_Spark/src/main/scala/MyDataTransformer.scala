@@ -19,12 +19,13 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 object MyDataTransformer {
 
   val KAFKA_HOST = if (MyExecutor.isTestRun) "172.21.0.2:9092" else "kpmg_kafka_1:9092"
+  val KAFKA_TOPIC = "mytopic"
 
   def startSparkStreaming(): Unit = {
 
     // Create a local StreamingContext with two working thread and batch interval of 1 second.
 
-    val conf = new SparkConf().setMaster("local[2]").setAppName("NetworkWordCount")
+    val conf = new SparkConf().setMaster("local[2]").setAppName("Docker_Kafka_Spark")
     val streamingContext = new StreamingContext(conf, Seconds(10))
 
 
@@ -32,12 +33,12 @@ object MyDataTransformer {
       "bootstrap.servers" -> KAFKA_HOST,
       "key.deserializer" -> classOf[StringDeserializer],
       "value.deserializer" -> classOf[StringDeserializer],
-      "group.id" -> "use_a_separate_group_id_for_each_stream",
+      "group.id" -> "my_group_id",
       "auto.offset.reset" -> "latest",
       "enable.auto.commit" -> (false: java.lang.Boolean)
     )
 
-    val topics = Array("mytopic")
+    val topics = Array(KAFKA_TOPIC)
     val inputStream = KafkaUtils.createDirectStream[String, String](
       streamingContext,
       PreferConsistent,
