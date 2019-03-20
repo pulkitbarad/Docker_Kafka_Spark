@@ -159,4 +159,4 @@ We could have any of the other available options to store our data like internal
 * Add Jupyter or Zeplin to docker image to ease the data analysis process.
 * Add unit tests and automate integration tests.
 * Automate code build and deployment process to avoid losing sleep over production deployments.
-* Any suggestions are welcome, use common sense and in case of any ideas, Keep'em coming!
+* Any suggestions are welcome, use common sense and in case of any ideas, keep'em coming!
