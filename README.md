@@ -74,7 +74,7 @@ Now that we have made ourselves familiar with goal, motivation and constraints, 
 
 Based on the high-level diagram from the following image, it is clear that there are three different layers: Source Sink(Twitter Publisher), Collect and Process(Kafka and Spark) and Store (RDBMS). 
 
-(./HighLevelDesign.png)
+![](./HighLevelDesign.png)
 We are using Twitter4J library to get data from twitter streaming API. Before we make any decision on the data we are collecting, it is important to notice that we are only collecting a fraction of the total twitter status generated (firehose). Twitter streaming API also has some rate limits but for now they are handled gracefully by Twitter4J library.
 
 Twitter4J has a streaming listener, ```StatusListener```, that will call onStatus method upon receiving new status.
